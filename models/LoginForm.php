@@ -27,12 +27,23 @@ class LoginForm extends Model
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password'], 'required', 'message'=>'Заполните поле'],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'username' =>'Email',
+            'password' => 'Пароль',
+            'rememberMe' => 'Запомнить меня',
+        ];
+    }
     /**
      * Logs in a user using the provided username and password.
      * @return bool whether the user is logged in successfully
