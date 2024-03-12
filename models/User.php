@@ -38,6 +38,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['email', 'password'], 'string', 'max' => 255],
             [['email'], 'email', 'message'=>'Некорректный email'],
             [['email'], 'unique', 'message'=>'Пользователь с таким email уже существует'],
+            [['password'], 'match', 'pattern' =>'/^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!?\-\/\_\\\#\@]{8,}$/', 'message'=>'Пароль должен содержать цифру, букву и быть длиннее 8-ми символов'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -51,7 +52,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'id' => 'ID',
             'name' => 'Имя',
             'email' => 'Email',
-            'password' => 'Пароль',
+            'password' => 'Пароль (В пароле могут быть буквы только латинского алфавита, числа и спецсимволы !?-/_\#@)',
             'password_confirmation' => 'Повторите пароль',
             'role_id' => 'Role ID',
         ];

@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Role;
 use app\models\UserRegister;
 
 class SiteController extends Controller
@@ -137,8 +138,11 @@ class SiteController extends Controller
         $model = new UserRegister();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) ) {
+                $model-> role_id = Role::user_role_id;
+                if ( $model->save()) {
+                    return $this->redirect('login');
+                }
             }
         } else {
             $model->loadDefaultValues();
