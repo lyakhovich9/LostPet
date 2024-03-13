@@ -32,11 +32,13 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'role_id'], 'required'],
+            [['name', 'email', 'password', 'password_confirmation'], 'required', 'message'=>'Поле не заполнено'],
             [['role_id'], 'integer'],
             [['name'], 'string', 'max' => 511],
             [['email', 'password'], 'string', 'max' => 255],
-            [['email'], 'unique'],
+            [['email'], 'email', 'message'=>'Некорректный email'],
+            [['email'], 'unique', 'message'=>'Пользователь с таким email уже существует'],
+            [['password'], 'match', 'pattern' =>'/^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9!?\-\/\_\\\#\@]{8,}$/', 'message'=>'Пароль должен содержать цифру, букву и быть длиннее 8-ми символов'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => Role::class, 'targetAttribute' => ['role_id' => 'id']],
         ];
     }
@@ -48,9 +50,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Имя',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Пароль (В пароле могут быть буквы только латинского алфавита, числа и спецсимволы !?-/_\#@)',
+            'password_confirmation' => 'Повторите пароль',
             'role_id' => 'Role ID',
         ];
     }
