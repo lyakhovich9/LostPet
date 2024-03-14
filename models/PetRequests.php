@@ -51,10 +51,10 @@ class PetRequests extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
+            'name' => 'Имя',
+            'description' => 'Описание',
             'admin_message' => 'Admin Message',
-            'missing_date' => 'Missing Date',
+            'missing_date' => 'Дата',
             'user_id' => 'User ID',
             'status_id' => 'Status ID',
         ];
