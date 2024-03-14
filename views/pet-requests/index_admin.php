@@ -19,10 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Изменить', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -43,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'status',
                 'content'=> function($petRequest) {
                     $html = Html::beginForm(['update','id'=>$petRequest->id]);
-                    $html .= Html::activeDropDownList($petRequest, 'status',
+                    $html .= Html::activeDropDownList($petRequest, 'status_id',
                     [
                         2 =>'Принята',
                         3 =>'Отклонена'
