@@ -14,6 +14,10 @@ use Yii;
  */
 class Status extends \yii\db\ActiveRecord
 {
+    const status_1 = 1;
+    const status_2 = 2;
+    const status_3 = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -52,5 +56,10 @@ class Status extends \yii\db\ActiveRecord
     public function getPetRequests()
     {
         return $this->hasMany(PetRequests::class, ['status_id' => 'id']);
+    }
+
+    public function __toString()
+    {
+        return $this->status;
     }
 }
