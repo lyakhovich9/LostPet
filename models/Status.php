@@ -17,6 +17,8 @@ class Status extends \yii\db\ActiveRecord
     const status_1 = 1;
     const status_2 = 2;
     const status_3 = 3;
+    const status_4 = 4;
+    const status_5 = 5;
 
     /**
      * {@inheritdoc}

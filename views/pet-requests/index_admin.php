@@ -1,6 +1,7 @@
 <?php
 
 use app\models\PetRequests;
+use app\models\Status;
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Dropdown;
 use yii\helpers\Html;
@@ -39,24 +40,49 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'status',
                 'content'=> function($petRequest) {
                     $html = Html::beginForm(['update','id'=>$petRequest->id]);
-                    $html .= Html::activeDropDownList($petRequest, 'status_id',
-                    [
-                        2 =>'Принята',
-                        3 =>'Отклонена'
-                    ],
+                    if ($petRequest->status_id === Status::status_1) {
 
-                    [
-                        'prompt' => [
-                            'text' => 'В обработке',
-                            'options' => [
-                                'style' => 'display:none'
+                        $html .= Html::activeDropDownList($petRequest, 'status_id',
+                            [
+                                2 =>'Принята',
+                                3 =>'Отклонена'
+                            ],
+        
+                            [
+                                'prompt' => [
+                                    'text' => 'В обработке',
+                                    'options' => [
+                                        'style' => 'display:none'
+                                    ]
+                                ]
                             ]
-                        ]
-                    ]
-                );
-                    $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
-                    $html .= Html::endForm();
-                    return $html;
+                        );
+
+                        $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
+                        $html .= Html::endForm();
+                        return $html;
+                    } elseif ($petRequest->status_id === Status::status_2) {
+
+                        $html .= Html::activeDropDownList($petRequest, 'status_id',
+                            [
+                                4 =>'Найден',
+                                5 =>'Не найден'
+                            ],
+        
+                            [
+                                'prompt' => [
+                                    'text' => 'Принята',
+                                    'options' => [
+                                        'style' => 'display:none'
+                                    ]
+                                ]
+                            ]
+                        );
+
+                        $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
+                        $html .= Html::endForm();
+                        return $html;
+                    }
                 }
             ]
         ],
