@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /** @var yii\web\View $this */
 /** @var app\models\PetRequests $model */
 
-$this->title = 'Create Pet Requests';
-$this->params['breadcrumbs'][] = ['label' => 'Pet Requests', 'url' => ['index']];
+$this->title = 'Создание заявления';
+$this->params['breadcrumbs'][] = ['label' => 'Заявления', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pet-requests-create">
