@@ -32,10 +32,20 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description:ntext',
-            'admin_message:ntext',
+            [
+                'attribute'=>'admin_message',
+                'content'=> function($petRequest) {
+                    $html = Html::beginForm(['update','id'=>$petRequest->id]);
+                    $html .= Html::activeTextarea($petRequest, 'admin_message');
+                    $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
+                    $html .= Html::endForm();
+                    return $html;
+                }
+            ],
             'missing_date',
             'user_id',
             'status_id',
+            
             [
                 'attribute'=>'status',
                 'content'=> function($petRequest) {
