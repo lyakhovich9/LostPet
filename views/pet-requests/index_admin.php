@@ -1,6 +1,8 @@
 <?php
 
 use app\models\PetRequests;
+use yii\bootstrap5\ActiveForm;
+use yii\bootstrap5\Dropdown;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -10,7 +12,7 @@ use yii\widgets\Pjax;
 /** @var app\models\PetRequestsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Pet Requests';
+$this->title = 'Заявление';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pet-requests-index">
@@ -18,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Pet Requests', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Изменить', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -35,14 +37,32 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'admin_message:ntext',
             'missing_date',
-            //'user_id',
-            //'status_id',
+            'user_id',
+            'status_id',
             [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, PetRequests $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
+                'attribute'=>'status',
+                'content'=> function($petRequest) {
+                    $html = Html::beginForm(['update','id'=>$petRequest->id]);
+                    $html .= Html::activeDropDownList($petRequest, 'status',
+                    [
+                        2 =>'Принята',
+                        3 =>'Отклонена'
+                    ],
+
+                    [
+                        'prompt' => [
+                            'text' => 'В обработке',
+                            'options' => [
+                                'style' => 'display:none'
+                            ]
+                        ]
+                    ]
+                );
+                    $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
+                    $html .= Html::endForm();
+                    return $html;
+                }
+            ]
         ],
     ]); ?>
 
