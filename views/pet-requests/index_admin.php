@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pet-requests-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><b><?= Html::encode($this->title) ?></b></h1>
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,8 +28,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
+            
+            'user',
             'name',
             'description:ntext',
             [
@@ -43,9 +43,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'missing_date',
-            'user_id',
-            'status_id',
-            
             [
                 'attribute'=>'status',
                 'content'=> function($petRequest) {
@@ -67,11 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             ]
                         );
-
-                        $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
-                        $html .= Html::endForm();
-                        return $html;
-                    } elseif ($petRequest->status_id === Status::status_2) {
+                    } elseif ($petRequest->status_id == Status::status_2) {
 
                         $html .= Html::activeDropDownList($petRequest, 'status_id',
                             [
@@ -88,11 +81,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             ]
                         );
+                    }else {
+                        return $petRequest->status;
+                    }
 
                         $html .= Html::submitButton('Подтвердить', ['class' => 'btn btn-link']);
                         $html .= Html::endForm();
                         return $html;
-                    }
                 }
             ]
         ],

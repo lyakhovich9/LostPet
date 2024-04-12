@@ -157,4 +157,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function isAdmin(){
         return $this->role_id === Role::admin_role_id;
     }
+    public function __toString() {
+        return $this->email;
+    }
 }

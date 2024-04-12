@@ -8,11 +8,11 @@
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
 
-$this->title = 'Вход';
+$this->title = 'Авторизация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><b><?= Html::encode($this->title) ?></b></h1>
 
     <p>Введите Вашу эл.почту: </p>
 
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="form-group">
                 <div>
-                    <?= Html::submitButton('Вход', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton('Вход', ['class' => 'btn btn-success', 'name' => 'login-button']) ?>
                 </div>
             </div>
 
